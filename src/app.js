@@ -6,7 +6,6 @@ const app = express();
 app.set('port', process.env.PORT || '0.0.0.0');
 app.set('host',process.env.HOST || '0.0.0.0');
 
-
 //const whitelist = ['https://brave-yonath-783630.netlify.app'];
 
 

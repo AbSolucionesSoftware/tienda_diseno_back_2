@@ -26,7 +26,7 @@ homeCtrl.homaQuerysShop = async (req,res) => {
             banners: []
         };
         console.log(idUser);
-        if(!idUser){
+        if(idUser !== 'null'){
             const carritoUser = await Carrito.findOne({cliente: idUser});
             console.log("hay carrito", carritoUser);
             if(carritoUser){

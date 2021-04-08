@@ -14,7 +14,11 @@ homeCtrl.homaQuerysShop = async (req,res) => {
         //Filtro nadvar (Categoria,genero,temporada), Carrucel, ofertas, quienes somos, carritoCantidad, carrito, banners \
         const idUser = req.params.idUser;
         const home = {
-            filtroNav: [],
+            navbar: {
+                filtroNav: [],
+                temporadas: [],
+                genero: []
+            },
             carrucel:[],
             ofertas: false,
             tienda: [],
@@ -30,23 +34,38 @@ homeCtrl.homaQuerysShop = async (req,res) => {
                 home.carritoCantidad = 0;
             }
         }
-
         const banners = await modelBanner.find({publicado: true}).sort({createdAt: 1});
         home.banners = banners;
-
         const tienda = await Tienda.find();
         home.tienda = tienda;
-
         const promociones = await promocionModel.find({ idPromocionMasiva: { $exists: false } });
         if(promociones.length){
             home.ofertas = true;
         }else{
             home.ofertas = false;
         }
-
         const Carrucel = await Carousel.find().sort({ "createdAt" : -1}).limit(10);
         home.carrucel = Carrucel;
-
+        const genero = await Producto.aggregate([
+			{
+				$match: {
+					$or: [ { eliminado: { $exists: false } }, { eliminado: false } ]
+				}
+			},
+			{
+				$group: { _id: '$genero' }
+			}
+		]);
+        home.navbar.genero = genero;
+        const temporadas = await Producto.aggregate([
+			{
+				$match: {
+					$or: [ { eliminado: { $exists: false } }, { eliminado: false } ]
+				}
+			},
+			{ $group: { _id: '$temporada' } }
+		]);
+        home.navbar.temporadas = temporadas;
         await Producto.aggregate(
 			[
 				{
@@ -83,7 +102,7 @@ homeCtrl.homaQuerysShop = async (req,res) => {
 						}
 					}
 				}
-                home.filtroNav = arrayCategorias;
+                home.navbar.filtroNav = arrayCategorias;
 				res.status(200).json(home);
 				// console.log(arrayCategorias);
 			}

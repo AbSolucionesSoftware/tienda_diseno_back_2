@@ -28,6 +28,7 @@ homeCtrl.homaQuerysShop = async (req,res) => {
         console.log(idUser);
         if(!idUser){
             const carritoUser = await Carrito.findOne({cliente: idUser});
+            console.log(carritoUser);
             if(carritoUser){
                 home.carritoCantidad = carritoUser.articulos.length;
             }else{

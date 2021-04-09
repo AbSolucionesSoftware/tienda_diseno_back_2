@@ -50,7 +50,12 @@ const TiendaSchema = new Schema({
     politicasDevolucion: String,
     diasHorariosEmpresas: String,
     colorPage:{
-        nav: {
+        navPrimary: {
+            text: String,
+            background: String,
+            hoverText: String
+        },
+        navSecondary: {
             text: String,
             background: String,
             hoverText: String

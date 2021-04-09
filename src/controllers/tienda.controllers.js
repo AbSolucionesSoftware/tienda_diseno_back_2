@@ -127,4 +127,12 @@ tiendaCtrl.eliminarTienda = async (req, res) => {
     }
 };
 
+tiendaCtrl.cambiarColoresTienda = async (req,res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
 module.exports = tiendaCtrl;

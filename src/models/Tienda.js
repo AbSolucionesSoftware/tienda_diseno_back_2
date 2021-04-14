@@ -12,7 +12,7 @@ const TiendaSchema = new Schema({
             },
             cp: {
                 type: String
-            },
+            }, 
             colonia: {
                 type: String
             },

@@ -25,6 +25,6 @@ router.route('/:idTienda')
 
 router.route('/editar/colors/:idTienda').put(auth,cambiarColoresTienda);
 
-router.route('/horario/empresa/:idTienda').put(auth,agregarHorarios);
+router.route('/horario/empresa/').put(auth,agregarHorarios);
 
 module.exports = router;

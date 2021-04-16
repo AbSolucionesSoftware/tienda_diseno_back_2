@@ -49,6 +49,13 @@ const TiendaSchema = new Schema({
     politicasDescuentos: String,
     politicasDevolucion: String,
     diasHorariosEmpresas: String,
+    horario:[{
+        dia: String,
+        key: Number,
+        horarioInicial: String,
+        horarioFinal: String,
+        close: Boolean
+    }],
     colorPage:{
         navPrimary: {
             text: String,
